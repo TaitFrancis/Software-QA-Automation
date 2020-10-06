@@ -1,4 +1,5 @@
-var nzxtArray = require('../testAssets/nzxtArray')
+var nzxtCatArray = require('../testAssets/nzxtCatArray')
+var nzxtSearchArray = require('../testAssets/nzxtSearchArray')
 module.exports = {
     beforeEach: browser => {
         browser
@@ -11,8 +12,10 @@ module.exports = {
             .end()
     },
     'Search test': browser => {
-        pageObj
-        .search(browser)
+        nzxtSearchArray.forEach(test => {
+            pageObj
+              .search(test)
+            })
     },
     'Add to cart test': browser => {
             pageObj
@@ -27,7 +30,7 @@ module.exports = {
         .bld2(browser)
     },
     'Categories test': browser => {
-        nzxtArray.forEach(test => {
+        nzxtCatArray.forEach(test => {
             pageObj
               .category(test)
             })

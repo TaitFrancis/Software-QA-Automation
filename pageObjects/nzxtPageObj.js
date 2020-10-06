@@ -9,14 +9,13 @@ var categoryCommands = {
     },
 }
 var searchCommands = {
-    search: function () {
+    search: function (Input) {
         this
         .maximizeWindow()
         .click('@searchBtn')
-        .waitForElementVisible('@searchField')
-        .setValue('@searchField', ['Puck', this.api.Keys.ENTER])
-        .verify.containsText('@page', 'Puck')
-        .api.back()
+        .clearValue('@searchField')
+        .setValue('@searchField', [Input.search, this.api.Keys.ENTER])
+        .verify.containsText('@page', Input.search)
         return this
     }
 }
@@ -79,6 +78,11 @@ var bldCommands = {
         .click('@x570btn')
         .click('@gpuTab')
         .click('@cpuTab')
+        .pause(1000)
+        .api.acceptAlert
+        this
+        .click('@ryzen9btn')
+        .pause(1000)
         .click('@psuTab')
         .click('@ramTab')
         .click('@storageTab')
@@ -127,7 +131,7 @@ module.exports = {
             selector: '.breadcrumbs'
         },
         page: {
-            selector: '.category-list-container'
+            selector: 'div[class="category-list-container container"]'
         },
         contactHead: {
             selector: '.contacts-header'
@@ -237,8 +241,8 @@ module.exports = {
             selector: '//button[contains(text(),"START OVER")]',
             locateStrategy: 'xpath'
         },
-        ryzen7btn: {
-            selector: '//a[contains(text(),"-$190")]',
+        ryzen9btn: {
+            selector: '(//a[@class="btn btn-green btn-outline"])[23]',
             locateStrategy: 'xpath'
         }
     }
